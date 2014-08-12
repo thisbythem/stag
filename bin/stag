@@ -50,5 +50,6 @@ $action = array_shift($argv);
 $opts = $argv;
 $stag->run($action, $opts);
 exit(0);
+
 ?>
 
