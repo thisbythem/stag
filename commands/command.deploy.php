@@ -31,7 +31,7 @@ EOF;
     $this->handleInvalidEnvironment();
 
     // Check if we have a valid strategy
-    $this->strategy = $this->config['servers'][$this->env]['deploy_strategy'];
+    $this->strategy = $this->config['servers'][$this->env]['deploy']['strategy'];
     $this->handleInvalidStrategy();
 
     // Do we need to pull content first?
