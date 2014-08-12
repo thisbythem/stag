@@ -31,6 +31,11 @@ class SSH {
     return shell_exec("$ssh 'cd $this->webroot; $cmd'");
   }
 
+  public function homeExec($cmd) {
+    $ssh = $this->connectionString();
+    return shell_exec("$ssh '$cmd'");
+  }
+
   protected function connectionString() {
     $conn = array('ssh');
 

@@ -59,20 +59,6 @@ EOF;
     }
   }
 
-  private function handleNotDeployed() {
-    $ssh = $this->getSshConnection();
-    $output = $ssh->exec("[ ! -d $this->webroot ] && echo 'false'");
-    if ($output == 'false') {
-      $output = <<<EOF
-I can't find a Statamic site at the configured webroot: $this->webroot
-
-Please check your configuration or try deploying first?
-EOF;
-      $this->displayFeedback($output);
-      exit(1);
-    }
-  }
-
   private function pullContentWithGit() {
     $this->displayFeedback("Checking for changes on $this->env");
     $ssh = $this->getSshConnection();
