@@ -1,0 +1,54 @@
+#! /usr/bin/env php
+
+<?php
+
+// start measuring
+define("STATAMIC_START", microtime(true));
+define("BASE_PATH", dirname("_add-ons"));
+define("APP_PATH", BASE_PATH . "/_app");
+
+// setting this now so that we can do things before the configurations are fully loaded
+// without PHP freaking out in PHP 5.3.x
+date_default_timezone_set('UTC');
+
+require_once APP_PATH . '/vendor/Slim/Slim.php';
+require_once APP_PATH . '/vendor/SplClassLoader.php';
+
+\Slim\Slim::registerAutoloader();
+
+$packages = array(
+  'Buzz',
+  'Carbon',
+  'emberlabs',
+  'Intervention',
+  'Michelf',
+  'Netcarver',
+  'Stampie',
+  'Symfony',
+  'Whoops',
+  'Zeuxisoo',
+  'erusev',
+  'Propel'
+);
+
+foreach ($packages as $package) {
+  $loader = new SplClassLoader($package, APP_PATH . '/vendor/');
+  $loader->register();
+}
+
+require_once APP_PATH . '/vendor/Spyc/Spyc.php';
+require_once APP_PATH . '/vendor/Lex/Parser.php';
+require_once APP_PATH . '/core/functions.php';
+
+// register the Statamic autoloader
+spl_autoload_register("autoload_statamic");
+
+$stag = new API_stag();
+
+$file = array_shift($argv);
+$action = array_shift($argv);
+$opts = $argv;
+$stag->run($action, $opts);
+exit(0);
+?>
+
