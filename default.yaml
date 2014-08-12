@@ -1,0 +1,22 @@
+servers:
+  production:
+    host: example.com
+    webroot: /var/www/example.com/public
+    user: deploy
+    password:
+    port: 22
+    forward_agent: true
+
+    deploy:
+      strategy: git
+      pull_content_before: true
+      clear_cache_after: true
+
+    pull_content:
+      strategy: git
+      commit_message: "Content update from production"
+
+clear_cache:
+  directories:
+    - _app
+    - _add-ons
