@@ -25,7 +25,7 @@ EOF;
   public function run($options = array()) {
     $this->env = array_shift($options);
 
-    $this->displayFeedback("Checking configuration");
+    $this->displayFeedback("Checking configuration:");
     // Handle incorrect arguments
     $this->handleNoEnvironment();
     $this->handleInvalidEnvironment();
@@ -36,7 +36,7 @@ EOF;
 
     // Do we need to pull content first?
     if ($this->shouldPullContentFirst()) {
-      $this->displayFeedback("Pulling content from server");
+      $this->displayFeedback("Pulling content from server:");
       $class_name = $this->commands['pull_content'];
       $puller = new $class_name($this->config);
       $puller->run(array($this->env));
