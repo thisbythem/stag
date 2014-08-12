@@ -39,7 +39,7 @@ Usage: stag <command> <options>
 Try stag help to list all commands.
 EOF;
     $this->displayFeedback($output);
-    exit(0);
+    exit(1);
   }
 
   private function handleCommandNotFound($cmd) {
@@ -47,6 +47,6 @@ EOF;
 I don't know how to $cmd. Would you like to teach me?
 EOF;
     $this->displayFeedback($output);
-    exit(0);
+    exit(1);
   }
 }
