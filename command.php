@@ -56,14 +56,13 @@ abstract class Command {
     }
 
     $this->webroot = $env_config['webroot'];
-    $this->deploy_strategy = $env_config['deploy_strategy'];
-    $this->pull_content_strategy = $env_config['pull_content_strategy'];
     $this->user = $env_config['user'];
     $this->password = $env_config['password'];
     $this->host = $env_config['host'];
     $this->port = $env_config['port'];
     $this->forward_agent = $env_config['forward_agent'];
-    $this->pull_content_before_deploy = $env_config['pull_content_before_deploy'];
+    $this->deploy = $env_config['deploy'];
+    $this->pull_content = $env_config['pull_content'];
   }
 
   private function handleNoConfigForEnv() {
