@@ -50,6 +50,8 @@ EOF;
   }
 
   private function clearRemoteServerCache() {
+    $this->handleNotDeployed();
+
     $ssh = $this->getSshConnection();
     $cache_dir = "_cache";
 
