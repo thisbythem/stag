@@ -69,7 +69,6 @@ EOF;
 
     if (!$has_git_changes) {
       $this->displayFeedback("No changes on $this->env.");
-      $ssh->exec('git push');
       return;
     }
 
