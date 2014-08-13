@@ -41,8 +41,12 @@ EOF;
     foreach ($this->directories as $dir) {
       $sub_dir = "$cache_dir/$dir";
       if (Folder::exists($sub_dir)) {
-        Folder::wipe($sub_dir);
-        $output = "_cache/$dir has been cleared.";
+        $output = shell_exec("rm -rf $sub_dir/*");
+        if (strpos($output, 'denied')) {
+          $output = "ERROR:\n$output";
+        } else {
+          $output = "_cache/$dir has been cleared.";
+        }
         $this->displayFeedback($output);
       }
     }
