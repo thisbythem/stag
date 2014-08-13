@@ -51,6 +51,10 @@ abstract class Command {
   protected function extractConfigForEnv() {
     $env_config = $this->config['servers'][$this->env];
 
+    if ($this->env == null) {
+      $this->handleNoEnv();
+    }
+
     if ($env_config == null) {
      $this->handleNoConfigForEnv();
     }
@@ -74,10 +78,16 @@ EOF;
     exit(1);
   }
 
+  protected function handleNoEnv() {
+    $output = <<<EOF
+I need an environment in order to do this.
+EOF;
+    $this->displayFeedback($output);
+    exit(1);
+  }
+
   protected function handleNotDeployed() {
-    $ssh = $this->getSshConnection();
-    $output = $ssh->homeExec("[ ! -d $this->webroot ] && echo 'false'");
-    if (trim($output) == 'false') {
+    if (!$this->hasBeenDeployed()) {
       $output = <<<EOF
 I can't find a Statamic site at the configured webroot: $this->webroot
 
@@ -88,5 +98,10 @@ EOF;
     }
   }
 
+  protected function hasBeenDeployed() {
+    $ssh = $this->getSshConnection();
+    $webroot_exists = $ssh->homeExec("[ -d $this->webroot ] && echo 'found'");
+    return (trim($webroot_exists) === 'found') ? true : false;
+  }
 }
 
