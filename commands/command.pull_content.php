@@ -69,7 +69,10 @@ EOF;
 
     if (!$has_git_changes) {
       $this->displayFeedback("No changes on $this->env.");
+      $ssh->exec('git push');
+      return;
     }
+
     $commit_message = $this->config['servers'][$this->env]['pull_content']['commit_message'];
     $this->displayFeedback("Committing and pushing up content.");
     $output = $ssh->exec("git add --all");

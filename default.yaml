@@ -11,6 +11,7 @@ servers:
       strategy: git
       pull_content_before: true
       clear_cache_after: true
+      repo_url: git@github.com:example.git
 
     pull_content:
       strategy: git

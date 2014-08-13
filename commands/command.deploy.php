@@ -3,6 +3,7 @@
 class Deploy extends Command {
 
   protected $env;
+  protected $deployed = false;
 
   public static function helpSummary() {
     return <<<EOF
@@ -34,12 +35,16 @@ EOF;
     $this->strategy = $this->config['servers'][$this->env]['deploy']['strategy'];
     $this->handleInvalidStrategy();
 
-    // Do we need to pull content first?
-    if ($this->shouldPullContentFirst()) {
-      $this->displayFeedback("Pulling content from server:");
-      $class_name = $this->commands['pull_content'];
-      $puller = new $class_name($this->config);
-      $puller->run(array($this->env));
+    if ($this->hasBeenDeployed()) {
+      $this->deployed = true;
+
+      // Do we need to pull content first?
+      if ($this->shouldPullContentFirst()) {
+        $this->displayFeedback("Pulling content from server:");
+        $class_name = $this->commands['pull_content'];
+        $puller = new $class_name($this->config);
+        $puller->run(array($this->env));
+      }
     }
 
     // Deploy the site
@@ -100,7 +105,19 @@ EOF;
 
   private function deployWithGit() {
     $ssh = $this->getSshConnection();
-    $output = $ssh->exec('git pull');
+    if ($this->deployed) {
+      $output = $ssh->exec('git pull');
+    } else {
+      $path_pieces = explode('/', $this->webroot);
+      $dir_name = array_pop($path_pieces);
+      $path = implode('/', $path_pieces);
+      $repo = $this->config['servers'][$this->env]['deploy']['repo_url'];
+      if (!$repo) {
+        $this->displayFeedback('I need a git repo to clone.');
+        exit(1);
+      }
+      $output = $ssh->homeExec("cd $path; git clone $repo $dir_name");
+    }
 
     $this->displayFeedback($output);
   }
