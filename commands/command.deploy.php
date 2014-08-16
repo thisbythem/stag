@@ -138,6 +138,32 @@ EOF;
   }
 
   private function deployWithFtp() {
-    $this->displayFeedback('Imma gonna deploy with ftp');
+    try {
+      $ftp = new Ftp("ftp://$this->user:$this->password@$this->host/$this->webroot/$content_root");
+      $this->putAll($ftp, BASE_PATH, $this->webroot);
+      $this->displayFeedback("Content has been pulled.");
+      $ftp->close();
+    } catch (Exception $e) {
+      $this->displayFeedback("Something has gone wrong:");
+      $this->displayFeedback(var_dump($e));
+      exit(1);
+    }
   }
+
+  private function putAll($ftp, $src_dir, $dst_dir) {
+    $d = dir($src_dir);
+    while($file = $d->read()) { // do this for each file in the directory
+      if ($file != "." && $file != ".." && $file != ".git") { // to prevent an infinite loop
+        if (is_dir($src_dir."/".$file)) { // do the following if it is a directory
+          if (!$ftp->isDir($dst_dir."/".$file)) {
+            $ftp->mkdir($dst_dir."/".$file); // create directories that do not yet exist
+          }
+          $this->putAll($ftp, $src_dir."/".$file, $dst_dir."/".$file); // recursive part
+        } else {
+          $upload = $ftp->put($dst_dir."/".$file, $src_dir."/".$file, FTP_BINARY); // put the files
+        }
+      }
+    }
+  }
+
 }
