@@ -109,6 +109,7 @@ EOF;
       $files = $ftp->nlist('*');
       $this->recursivelyGetFilesWithFtp($ftp, $files);
       $this->displayFeedback("Content has been pulled.");
+      $ftp->close();
     } catch (Exception $e) {
       $this->displayFeedback("Something has gone wrong:");
       $this->displayFeedback(var_dump($e));
