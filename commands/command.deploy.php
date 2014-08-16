@@ -157,10 +157,13 @@ EOF;
         if (is_dir($src_dir."/".$file)) { // do the following if it is a directory
           if (!$ftp->isDir($dst_dir."/".$file)) {
             $ftp->mkdir($dst_dir."/".$file); // create directories that do not yet exist
+            $this->displayFeedback("Creating $dst_dir/$file");
           }
           $this->putAll($ftp, $src_dir."/".$file, $dst_dir."/".$file); // recursive part
         } else {
-          $upload = $ftp->put($dst_dir."/".$file, $src_dir."/".$file, FTP_BINARY); // put the files
+          $dest_file = "$dst_dir/$file";
+          $upload = $ftp->put($dest_file, $src_dir."/".$file, FTP_BINARY); // put the files
+          $this->displayFeedback("Uploading $dest_file");
         }
       }
     }
