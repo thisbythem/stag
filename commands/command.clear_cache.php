@@ -50,7 +50,6 @@ EOF;
         $this->displayFeedback($output);
       }
     }
-    exit(0);
   }
 
   private function clearRemoteServerCache() {
@@ -77,6 +76,5 @@ EOF;
       }
       $this->displayFeedback($output);
     }
-    exit(0);
   }
 }
