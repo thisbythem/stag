@@ -26,8 +26,8 @@ abstract class Command {
         'clear_cache' => 'ClearCache',
         'deploy' => 'Deploy',
         'help' => 'Help',
-        //'install' => 'Install',
-        'pull_content' => 'PullContent'
+        'pull_content' => 'PullContent',
+        'set_permissions' => 'SetPermissions'
       );
     }
 
