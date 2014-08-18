@@ -124,6 +124,7 @@ EOF;
 
   private function deployWithRsync() {
     $this->displayFeedback("Deploying with rsync to $this->env");
+    $ignore_files = $this->getIgnoreFiles();
 
     $cmd = 'rsync -e ';
 
@@ -131,7 +132,14 @@ EOF;
       $cmd .= "'ssh -p $this->port' ";
     }
 
-    $cmd .=  "-avl --stats --progress --exclude .git* " . BASE_PATH . " $this->user@$this->host:$this->webroot;";
+    $cmd .=  "-avl --stats --progress ";
+
+    foreach ($ignore_files as $ignore) {
+      $cmd .= "--exclude $ignore ";
+
+    }
+
+    $cmd .=  BASE_PATH . " $this->user@$this->host:$this->webroot;";
 
     $output = shell_exec($cmd);
     $this->displayFeedback($output);
@@ -151,12 +159,7 @@ EOF;
   }
 
   private function putAll($ftp, $src_dir, $dst_dir) {
-    $system_ignore_files = array('.', '..');
-    $ignore_files = $this->config['servers'][$this->env]['deploy']['ignore_files'];
-
-    if (!empty($ignore_files)) {
-      $ignore_files = array_merge($system_ignore_files, $ignore_files);
-    }
+    $ignore_files = $this->getIgnoreFiles();
 
     $d = dir($src_dir);
     while($file = $d->read()) {
@@ -174,6 +177,16 @@ EOF;
         }
       }
     }
+  }
+
+  private function getIgnoreFiles() {
+    $system_ignore_files = array('.', '..');
+    $ignore_files = $this->config['servers'][$this->env]['deploy']['ignore_files'];
+
+    if (!empty($ignore_files)) {
+      $ignore_files = array_merge($system_ignore_files, $ignore_files);
+    }
+    return $ignore_files;
   }
 
 }
