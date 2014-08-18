@@ -107,7 +107,7 @@ EOF;
     try {
       $ftp = new Ftp("ftp://$this->user:$this->password@$this->host/$this->webroot/$content_root");
       $files = $ftp->nlist('*');
-      $this->recursivelyGetFilesWithFtp($ftp, $files);
+      $this->getAll($ftp, $files);
       $this->displayFeedback("Content has been pulled.");
       $ftp->close();
     } catch (Exception $e) {
@@ -117,14 +117,19 @@ EOF;
     }
   }
 
-  private function recursivelyGetFilesWithFtp($ftp, $files) {
+  private function getAll($ftp, $files) {
+    $system_ignore_files = array('.', '..');
+
     $content_root = Config::getContentRoot();
     foreach ($files as $file) {
-      if ($ftp->isDir($file)) {
-        $files = $ftp->nlist($file);
-        $this->recursivelyGetFilesWithFtp($ftp, $files);
-      } else {
-        $ftp->get("$content_root/$file", $file, FTP_BINARY);
+      if (!in_array($file, $system_ignore_files)) {
+        if ($ftp->isDir($file)) {
+          $files = $ftp->nlist($file);
+          $this->getAll($ftp, $files);
+        } else {
+          $ftp->get("$content_root/$file", $file, FTP_BINARY);
+          $this->displayFeedback("Downloading: $file");
+        }
       }
     }
   }
