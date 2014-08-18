@@ -151,18 +151,25 @@ EOF;
   }
 
   private function putAll($ftp, $src_dir, $dst_dir) {
+    $system_ignore_files = array('.', '..');
+    $ignore_files = $this->config['servers'][$this->env]['deploy']['ignore_files'];
+
+    if (!empty($ignore_files)) {
+      $ignore_files = array_merge($system_ignore_files, $ignore_files);
+    }
+
     $d = dir($src_dir);
-    while($file = $d->read()) { // do this for each file in the directory
-      if ($file != "." && $file != ".." && $file != ".git") { // to prevent an infinite loop
-        if (is_dir($src_dir."/".$file)) { // do the following if it is a directory
+    while($file = $d->read()) {
+      if (!in_array($file, $ignore_files)) {
+        if (is_dir($src_dir."/".$file)) {
           if (!$ftp->isDir($dst_dir."/".$file)) {
-            $ftp->mkdir($dst_dir."/".$file); // create directories that do not yet exist
+            $ftp->mkdir($dst_dir."/".$file);
             $this->displayFeedback("Creating $dst_dir/$file");
           }
-          $this->putAll($ftp, $src_dir."/".$file, $dst_dir."/".$file); // recursive part
+          $this->putAll($ftp, $src_dir."/".$file, $dst_dir."/".$file);
         } else {
           $dest_file = "$dst_dir/$file";
-          $upload = $ftp->put($dest_file, $src_dir."/".$file, FTP_BINARY); // put the files
+          $upload = $ftp->put($dest_file, $src_dir."/".$file, FTP_BINARY);
           $this->displayFeedback("Uploading $dest_file");
         }
       }
