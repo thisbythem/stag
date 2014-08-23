@@ -1,28 +1,50 @@
-## STAG
+# STAG
 
-### What is it?
-It's the command line interface for Statamic. It allows you to do all
-sorts of wonderful things. But mainly don't want to have to SSH into
-remote servers to manage, deploy or administrate your Statamic
-site.
+## What is it?
+It's the command line interface for Statamic. It can do all sorts of
+wonderful things for you like:
 
-### Who is it for?
-Currently stag is in BETA. Which means that it's not thouroughly tested,
-so it'd be better if you had a little know into what's happening. stag
-is a command line interface, so comfort with the command line is a must.
-If you're using it with a remote server somewhere, not only is is
-required that you are able to ssh into the server, it'd be super helpful
-if you are comfortable enough to ssh into that server and get around
-incase anything goes wrong. So you are a command line enthusiast looking
-to make your Statamic life a little easier but wielding the stag.
+- Deploy your code to a server (via git, rsync or ftp)
+- Pull your content down from a server (via git, rsync or ftp)
+- Clear your site cache; locally or remotely
+- Set file permissions; locally or remotely
+
+## Who is it for?
+You're a good looking Statamic developer who loves the command line. You
+believe that `stag clear_cache` is much better than using Finder to
+clear those directories manually.
 
 ## DISCLAIMER
-Stag is in beta version. It's not only kind of a requirement anymore
-that your code is under some sort of version control, it'd be helpful
-to backup your code base incase the worst happens. If you don't have
-version control or don't know how to use it to revert back to a certain
-state in the code, please proceed with extreme caution. That being said,
-I am using it in a production environment, and continue to. IF all that
-sounds good to you, then proceed to:
+Stag is in a very beta version. It has only been tested on OSX. And has
+only talked to an Ubuntu server. It will be manipulating files and
+setting permissions on things, so if you aren't comfortable with the
+command line, or your site isn't under some sort of version control,
+then stag might not be for you... yet.
 
-### Getting Started
+## Installing
+Download the repo, unzip and drop the stag directory into your
+\_add-ons. (You'll probably need to rename stag-master to stag)
+
+### Using stag
+You need to add the stag bin directory to your $PATH. In your
+.bash_profile (or your prefrerred shell's config) drop in this line:
+
+```
+export PATH=$PATH:/_add-ons/stag/bin
+```
+
+Reload your config file:
+
+```
+source ~/.bash_profile
+```
+
+And type `stag` in your Statamic root directory. If you see:
+
+```
+Stag lets you Statamic-it-up on the command line.
+Usage: stag <command> <options>
+Try stag help to list all commands.
+```
+Congratulations! Stag is installed!
+
