@@ -1,23 +1,104 @@
+# === S T A G ===
+# Can do all sorts of wonderful things but you need to configure a few things
+# to make it happen.
+#
+# DISCLAIMER: stag is still in beta mode. If you're not comfortable on the
+# command line or ssh'n into your server. If you don't know how to do that,
+# stag might not be for you just yet.
+#
+# SO PROCEED AT YOUR OWN RISK!
+#
+# That being said, I am using it in a production environment successfully. So
+# if you still want to move forward, let's get started.
+#
+# Copy this whole file and dump it into _config/add-ons/stag.yaml
+#
+# *= SERVERS =*
+#
+# stag can talk to your servers, no matter how many you've got. For most
+# commands, you will need ssh access. The deployment and pull content commands
+# are configured here as well as they might be different for each server.
+#
+# This is specific to each server, so there are no defaults.
 servers:
-  production:
-    host: example.com
-    webroot: /var/www/example.com/public
-    user: deploy
-    password:
-    port: 22
-    forward_agent: true
-
-    deploy:
-      strategy: git
-      pull_content_before: true
-      clear_cache_after: true
-      repo_url: git@github.com:example.git
-
-    pull_content:
-      strategy: git
-      commit_message: "Content update from production"
-
+# Uncomment the following and fill your server's info
+# production: # The name of the server to use with stag
+#   host: example.com # The host to ssh into
+#   webroot: /var/www/example.com/public # The webroot of your site
+#   user: deploy # SSH username
+#   password: password # SSH user password; If you don't set this, it'll use your ssh key
+#   port: 22 # SSH port; Don't need it if it's the default
+#   forward_agent: true # Recommended if you're using git for deployments
+#
+#   === DEPLOY ===
+#   You can have deploy pull_content, clear cache, and set permissions during
+#   the deployment task. Each strategy will have a few different options. Use
+#   the following configurations as guides for your preferred strategy.
+#
+#   == GIT ==
+#   deploy:
+#     strategy: git
+#     repo_url: git@github.com:example.git
+#     pull_content_before: true
+#     clear_cache_after: true
+#
+#   == RSYNC ==
+#   deploy:
+#     strategy: rsync
+#     pull_content_before: true
+#     clear_cache_after: true
+#     ignore_files:
+#       - .git
+#       - _cache
+#       - _logs
+#
+#   == FTP ==
+#   deploy:
+#     strategy: ftp
+#     pull_content_before: true
+#     clear_cache_after: true
+#     ignore_files:
+#       - .git
+#       - _cache
+#       - _logs
+#
+#   === PULL CONTENT ===
+#   This will pull your content down from the server. You can choose between
+#   git, ftp or rsync.
+#
+#   == GIT ==
+#   pull_content:
+#     strategy: git
+#     commit_message: "Content update from production"
+#
+#   == RSYNC ==
+#   pull_content:
+#     strategy: rsync
+#
+#   == FTP ==
+#   pull_content:
+#     strategy: ftp
+#
+# *= CLEAR CACHE =*
+# When in doubt clear the cache out.
+# stag will clear the directories in the _cache folders that you specify. The
+# only reason you'd need to change the defaults is if you're storing other
+# things in the cache that need clearing. If you have a server configured,
+# it'll clear cache there too!
 clear_cache:
   directories:
     - _app
     - _add-ons
+
+# *= SET PERMISSIONS =*
+# stag will set permissions for you. If you have a server configured, it'll
+# even ssh in and try and update permissions there too!  The defaults might do
+# ya fine, but by all means, change away my sysadmin friend.
+set_permissions:
+  site_permissions: 755 # This will be run first on the whole site directory
+  writable_permissions: 775 # Will be run after to set the writable directories
+  writable_directories: # A list of the writable directories; Statamic defaults
+    - _cache
+    - _content
+    - _logs
+    - _config/users
