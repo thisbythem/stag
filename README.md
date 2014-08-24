@@ -60,3 +60,14 @@ Configuration](https://github.com/thisbythem/stag/wiki/Server-Configuration)
 
 You can read how to configure each command here:
 [Wiki](https://github.com/thisbythem/stag/wiki)
+
+### Support
+Again, stag is in beta, so if you encounter something not working
+properly, please [create an
+issue](https://github.com/thisbythem/stag/issues/new) and we'll to take
+a look.
+
+### Contribute
+If you have an idea of something you'd like stag to do, suggest it here:
+[james@thisbythem.com](mailto:james@thisbythem.com?Subject=Stag Ideas)
+or feel free to fork, hack and pull request. Happy Hacking!
