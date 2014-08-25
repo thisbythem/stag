@@ -58,7 +58,7 @@ add on directory and copy it to `_config/add-ons/stag.yaml`
 You can read how to configure it in here: [Server
 Configuration](https://github.com/thisbythem/stag/wiki/Server-Configuration)
 
-You can read how to configure each command here:
+You can read more in-depth about each command here:
 [Wiki](https://github.com/thisbythem/stag/wiki)
 
 ### Support
