@@ -69,5 +69,5 @@ a look.
 
 ### Contribute
 If you have an idea of something you'd like stag to do, suggest it here:
-[james@thisbythem.com](mailto:james@thisbythem.com?Subject=Stag Ideas)
+[support@thisbythem.com](mailto:support@thisbythem.com?Subject=Stag Ideas)
 or feel free to fork, hack and pull request. Happy Hacking!
