@@ -34,6 +34,13 @@ class Tasks_stag extends Tasks {
 
   private function handleNoCommandGiven() {
     $output = <<<EOF
+               ______    _________        _          ______
+ {__}        .' ____ \  |  _   _  |      / \       .' ___  |         {__}
+  \/_____!   | (___ \_| |_/ | | \_|     / _ \     / .'   \_|    !_____\/
+    \----|    _.____`.      | |        / ___ \    | |   ____    |----/
+    /|   |\  | \____) |    _| |_     _/ /   \ \_  \ `.___]  |  /|   |\
+              \______.'   |_____|   |____| |____|  `._____.'
+
 Stag lets you Statamic-it-up on the command line.
 Usage: stag <command> <options>
 Try stag help to list all commands.
