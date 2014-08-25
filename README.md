@@ -39,14 +39,8 @@ Reload your config file:
 source ~/.bash_profile
 ```
 
-And type `stag` in your Statamic root directory. If you see:
-
-```
-Stag lets you Statamic-it-up on the command line.
-Usage: stag <command> <options>
-Try stag help to list all commands.
-```
-Congratulations! Stag is installed!
+Type `stag` in your Statamic root directory and if you are greeted by a
+couple of bucks, Congratulations! Stag is installed!
 
 ### Getting Started
 To list all the commands, type: `stag help`
