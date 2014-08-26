@@ -1,6 +1,13 @@
-# === S T A G ===
-# Can do all sorts of wonderful things but you need to configure a few things
-# to make it happen.
+#
+#                ______    _________        _          ______
+#  {__}        .' ____ \  |  _   _  |      / \       .' ___  |         {__}
+#   \/_____!   | (___ \_| |_/ | | \_|     / _ \     / .'   \_|    !_____\/
+#     \----|    _.____`.      | |        / ___ \    | |   ____    |----/
+#     /|   |\  | \____) |    _| |_     _/ /   \ \_  \ `.___]  |  /|   |\
+#               \______.'   |_____|   |____| |____|  `._____.'
+#
+# Stag can do all sorts of wonderful things but you need to configure a few
+# things to make it happen.
 #
 # DISCLAIMER: stag is still in beta mode. If you're not comfortable on the
 # command line or ssh'n into your server. If you don't know how to do that,
@@ -29,6 +36,8 @@ servers:
 #   password: password # SSH user password; If you don't set this, it'll use your ssh key
 #   port: 22 # SSH port; Don't need it if it's the default
 #   forward_agent: true # Recommended if you're using git for deployments
+#   strategy: git # You can set this to git, rsync or ftp
+#   repo_url: git@github.com:example.git # If using git as your strategy, set the ssh repo url
 #
 #   === DEPLOY ===
 #   You can have deploy pull_content, clear cache, and set permissions during
@@ -37,16 +46,15 @@ servers:
 #
 #   == GIT ==
 #   deploy:
-#     strategy: git
-#     repo_url: git@github.com:example.git
 #     pull_content_before: true
 #     clear_cache_after: true
+#     set_permissions_after: false
 #
 #   == RSYNC ==
 #   deploy:
-#     strategy: rsync
 #     pull_content_before: true
 #     clear_cache_after: true
+#     set_permissions_after: false
 #     ignore_files:
 #       - .git
 #       - _cache
@@ -54,7 +62,6 @@ servers:
 #
 #   == FTP ==
 #   deploy:
-#     strategy: ftp
 #     pull_content_before: true
 #     clear_cache_after: true
 #     set_permissions_after: true
@@ -69,16 +76,19 @@ servers:
 #
 #   == GIT ==
 #   pull_content:
-#     strategy: git
 #     commit_message: "Content update from production"
 #
 #   == RSYNC ==
 #   pull_content:
-#     strategy: rsync
+#     content_directories:
+#      - _content
+#      - assets
 #
 #   == FTP ==
 #   pull_content:
-#     strategy: ftp
+#     content_directories:
+#      - _content
+#      - assets
 #
 # *= CLEAR CACHE =*
 # When in doubt clear the cache out.
