@@ -138,6 +138,11 @@ EOF;
     $this->displayFeedback("Deploying with rsync to $this->env");
     $ignore_files = $this->getIgnoreFiles();
 
+    if ($this->hasNotBeenDeployed()) {
+      $ssh = $this->getSshConnection();
+      $ssh->homeExec("mkdir -p $this->webroot/{_cache,_logs}");
+    }
+
     $cmd = 'rsync -e ';
 
     if ($this->port !== null) {
