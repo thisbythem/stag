@@ -65,7 +65,9 @@ abstract class Command {
     $this->host = $env_config['host'];
     $this->port = $env_config['port'];
     $this->forward_agent = $env_config['forward_agent'];
+    $this->strategy = $env_config['strategy'];
     $this->deploy = $env_config['deploy'];
+    $this->repo_url = $env_config['repo_url'];
     $this->pull_content = $env_config['pull_content'];
   }
 

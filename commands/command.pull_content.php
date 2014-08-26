@@ -25,8 +25,9 @@ EOF;
     // Handle incorrect arguments
     $this->handleNoEnvironment();
 
+    $this->extractConfigForEnv($this->env);
+
     // Check if we have a valid strategy
-    $this->strategy = $this->config['servers'][$this->env]['pull_content']['strategy'];
     $this->handleInvalidStrategy();
 
     // Check that it's been deployed
@@ -132,6 +133,17 @@ EOF;
         }
       }
     }
+  }
+
+  private function getContentDirectories() {
+    $content_dirs = array(Config::getContentRoot());
+    $config_dirs = $this->pull_content['content_directories'];
+
+    if (!empty($config_dirs)) {
+      $content_dirs = array_unique(array_merge($content_dirs, $config_dirs));
+    }
+
+    return $content_dirs;
   }
 
 }

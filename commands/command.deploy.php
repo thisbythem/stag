@@ -31,8 +31,9 @@ EOF;
     $this->handleNoEnvironment();
     $this->handleInvalidEnvironment();
 
+    $this->extractConfigForEnv($this->env);
+
     // Check if we have a valid strategy
-    $this->strategy = $this->config['servers'][$this->env]['deploy']['strategy'];
     $this->handleInvalidStrategy();
 
     if ($this->hasBeenDeployed()) {
@@ -49,7 +50,6 @@ EOF;
 
     // Deploy the site
     $this->displayFeedback("Deploying to $this->env:");
-    $this->extractConfigForEnv($this->env);
     $strategy_method_name = 'deployWith' . ucwords($this->strategy);
     $this->{$strategy_method_name}();
 
@@ -123,7 +123,7 @@ EOF;
       $path_pieces = explode('/', $this->webroot);
       $dir_name = array_pop($path_pieces);
       $path = implode('/', $path_pieces);
-      $repo = $this->config['servers'][$this->env]['deploy']['repo_url'];
+      $repo = $this->repo_url;
       if (!$repo) {
         $this->displayFeedback('I need a git repo to clone.');
         exit(1);
