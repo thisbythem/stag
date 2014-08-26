@@ -60,6 +60,14 @@ EOF;
       $cleaner = new $class_name($this->config);
       $cleaner->run(array($this->env));
     }
+
+    // Set Perms?
+    if ($this->shouldClearCacheAfter()) {
+      $this->displayFeedback("Setting permissions:");
+      $class_name = $this->commands['set_permissions'];
+      $perms = new $class_name($this->config);
+      $perms->run(array($this->env));
+    }
   }
 
   private function shouldPullContentFirst() {

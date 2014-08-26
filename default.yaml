@@ -57,6 +57,7 @@ servers:
 #     strategy: ftp
 #     pull_content_before: true
 #     clear_cache_after: true
+#     set_permissions_after: true
 #     ignore_files:
 #       - .git
 #       - _cache
