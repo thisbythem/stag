@@ -103,5 +103,9 @@ EOF;
     $webroot_exists = $ssh->homeExec("[ -d $this->webroot ] && echo 'found'");
     return (trim($webroot_exists) === 'found') ? true : false;
   }
+
+  protected function hasNotBeenDeployed() {
+    return !$this->hasBeenDeployed();
+  }
 }
 
