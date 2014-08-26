@@ -78,6 +78,10 @@ EOF;
     return $this->config['servers'][$this->env]['deploy']['clear_cache_after'];
   }
 
+  private function shouldSetPermissionsAfter() {
+    return $this->config['servers'][$this->env]['deploy']['set_permissions_after'];
+  }
+
   private function handleNoEnvironment() {
     if ($this->env == null) {
       $output = <<<EOF
@@ -155,9 +159,16 @@ EOF;
 
   private function deployWithFtp() {
     try {
-      $ftp = new Ftp("ftp://$this->user:$this->password@$this->host/$this->webroot/$content_root");
+      $ftp = new Ftp("ftp://$this->user:$this->password@$this->host");
+
+      if (!$ftp->isDir($this->webroot)) {
+        $ftp->mkdir($this->webroot);
+        $ftp->mkdir("$this->webroot/_logs");
+        $ftp->mkdir("$this->webroot/_cache");
+      }
+
       $this->putAll($ftp, BASE_PATH, $this->webroot);
-      $this->displayFeedback("Content has been pulled.");
+      $this->displayFeedback("Site has been deployed.");
       $ftp->close();
     } catch (Exception $e) {
       $this->displayFeedback("Something has gone wrong:");
