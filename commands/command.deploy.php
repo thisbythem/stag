@@ -62,7 +62,7 @@ EOF;
     }
 
     // Set Perms?
-    if ($this->shouldClearCacheAfter()) {
+    if ($this->shouldSetPermissionsAfter()) {
       $this->displayFeedback("Setting permissions:");
       $class_name = $this->commands['set_permissions'];
       $perms = new $class_name($this->config);
