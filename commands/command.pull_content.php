@@ -101,14 +101,16 @@ EOF;
   }
 
   private function pullContentWithFtp() {
-    $content_root = Config::getContentRoot();
-
     $this->displayFeedback("Pulling content from $this->env");
+    $dirs = $this->getContentDirectories();
 
     try {
-      $ftp = new Ftp("ftp://$this->user:$this->password@$this->host/$this->webroot/$content_root");
-      $files = $ftp->nlist('*');
-      $this->getAll($ftp, $files);
+      $ftp = new Ftp("ftp://$this->user:$this->password@$this->host");
+      foreach ($dirs as $dir) {
+        $ftp->chdir("$this->webroot/$dir");
+        $files = $ftp->nlist('*');
+        $this->getAll($ftp, $dir, $files);
+      }
       $this->displayFeedback("Content has been pulled.");
       $ftp->close();
     } catch (Exception $e) {
@@ -118,17 +120,16 @@ EOF;
     }
   }
 
-  private function getAll($ftp, $files) {
+  private function getAll($ftp, $dir, $files) {
     $system_ignore_files = array('.', '..');
 
-    $content_root = Config::getContentRoot();
     foreach ($files as $file) {
       if (!in_array($file, $system_ignore_files)) {
         if ($ftp->isDir($file)) {
           $files = $ftp->nlist($file);
-          $this->getAll($ftp, $files);
+          $this->getAll($ftp, $dir, $files);
         } else {
-          $ftp->get("$content_root/$file", $file, FTP_BINARY);
+          $ftp->get("$dir/$file", $file, FTP_BINARY);
           $this->displayFeedback("Downloading: $file");
         }
       }
