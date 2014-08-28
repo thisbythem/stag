@@ -15,15 +15,16 @@ believe that `stag clear_cache` is much better than using Finder to
 clear those directories manually.
 
 ## DISCLAIMER
-Stag is in a **very** beta version. It has only been tested on OSX. And has
-only talked to an Ubuntu server. It will be manipulating files and
-setting permissions on things, so if you aren't comfortable with the
-command line, or your site isn't under some sort of version control,
-then stag might not be for you... yet.
+Stag is in beta. It has been used on OSX to talk to an Ubuntu server.
+Testers welcome!
+
+It will be manipulating files and setting permissions on things, so if
+you aren't comfortable with the command line, or your site isn't under
+some sort of version control, then stag might not be for you... yet.
 
 ## Installing
 Download the repo, unzip and drop the stag directory into your
-\_add-ons. _(You'll probably need to rename stag-master to stag)_
+\_add-ons. _(You'll need to rename stag-master to stag)_
 
 ### Using stag
 You need to add the stag bin directory to your $PATH. In your
@@ -46,11 +47,10 @@ couple of bucks, Congratulations! Stag is installed!
 To list all the commands, type: `stag help`
 
 For any command that will perform tasks on your server, you'll need to
-configure stag to talk to your server. Copy the default config from the
-add on directory and copy it to `_config/add-ons/stag.yaml`
+configure stag to talk to your server. Copy the default config to
+`_config/add-ons/stag.yaml`
 
-You can read how to configure it in here: [Server
-Configuration](https://github.com/thisbythem/stag/wiki/Server-Configuration)
+[Server Configuration](https://github.com/thisbythem/stag/wiki/Server-Configuration)
 
 You can read more in-depth about each command here:
 [Wiki](https://github.com/thisbythem/stag/wiki)
