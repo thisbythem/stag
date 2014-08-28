@@ -6,8 +6,8 @@ wonderful things for you like:
 
 - Deploy your code to a server (via git, rsync or ftp)
 - Pull your content down from a server (via git, rsync or ftp)
-- Clear your site cache; locally or remotely
-- Set file permissions; locally or remotely
+- Clear your site cache -- locally or remotely
+- Set file permissions -- locally or remotely
 
 ## Who is it for?
 You're a good looking Statamic developer who loves the command line. You
@@ -16,11 +16,10 @@ clear those directories manually.
 
 ## DISCLAIMER
 Stag is in beta. It has been used on OSX to talk to an Ubuntu server.
-Testers welcome!
 
 It will be manipulating files and setting permissions on things, so if
 you aren't comfortable with the command line, or your site isn't under
-some sort of version control, then stag might not be for you... yet.
+some sort of version control, then stag might not be for you... yet. Testers welcome!
 
 ## Installing
 Download the repo, unzip and drop the stag directory into your
