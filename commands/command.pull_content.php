@@ -84,20 +84,24 @@ EOF;
   }
 
   private function pullContentWithRsync() {
-    $content_root = Config::getContentRoot();
+    $content_dirs = $this->getContentDirectories();
 
     $this->displayFeedback("Pulling content from $this->env");
 
-    $cmd = 'rsync -e ';
+    foreach ($content_dirs as $dir) {
+      $cmd = 'rsync -e ';
 
-    if ($this->port !== null) {
-      $cmd .= "'ssh -p $this->port' ";
+      if ($this->port !== null) {
+        $cmd .= "'ssh -p $this->port' ";
+      }
+
+      $cmd .=  "-avl --stats --progress $this->user@$this->host:$this->webroot/$dir .;";
+
+      $output = shell_exec($cmd);
+      $this->displayFeedback($output);
     }
 
-    $cmd .=  "-avl --stats --progress $this->user@$this->host:$this->webroot/$content_root .;";
-
-    $output = shell_exec($cmd);
-    $this->displayFeedback($output);
+    $this->displayFeedback("All content pulled.");
   }
 
   private function pullContentWithFtp() {
