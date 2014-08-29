@@ -1,4 +1,4 @@
-# STAG
+![STAG: A Statamic CLI](http://assets.thisbythem.com.s3.amazonaws.com/blog/jw-stag.jpg "STAG: A Statamic CLI")
 
 ## What is it?
 It's the command line interface for Statamic. It can do all sorts of
