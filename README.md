@@ -30,7 +30,7 @@ You need to add the stag bin directory to your $PATH. In your
 .bash_profile (or your prefrerred shell's config) drop in this line:
 
 ```
-export PATH=$PATH:/_add-ons/stag/bin
+export PATH=$PATH:_add-ons/stag/bin
 ```
 
 Reload your config file:
