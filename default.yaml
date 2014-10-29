@@ -33,7 +33,8 @@ servers:
 #   host: example.com # The host to ssh into
 #   webroot: /var/www/example.com/public # The webroot of your site
 #   user: deploy # SSH username
-#   password: password # SSH user password; If you don't set this, it'll use your ssh key
+#   password: password # DEPRECATED: Please use ftp_password
+#   ftp_password: passwod # Your FTP password; Only if you're using ftp
 #   port: 22 # SSH port; Don't need it if it's the default
 #   forward_agent: true # Recommended if you're using git for deployments
 #   strategy: git # You can set this to git, rsync or ftp
