@@ -3,7 +3,6 @@
 class SSH {
   private $host;
   private $user;
-  private $password;
   private $timeout = 5;
   private $forward_agent;
   private $webroot;
