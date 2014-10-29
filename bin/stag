@@ -38,6 +38,7 @@ foreach ($packages as $package) {
 
 require_once APP_PATH . '/vendor/Spyc/Spyc.php';
 require_once APP_PATH . '/vendor/Lex/Parser.php';
+require_once APP_PATH . '/core/exceptions.php';
 require_once APP_PATH . '/core/functions.php';
 
 // register the Statamic autoloader
