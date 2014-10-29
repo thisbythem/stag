@@ -62,6 +62,7 @@ abstract class Command {
     $this->webroot = $env_config['webroot'];
     $this->user = $env_config['user'];
     $this->password = $env_config['password'];
+    $this->ftp_password = $env_config['ftp_password'];
     $this->host = $env_config['host'];
     $this->port = $env_config['port'];
     $this->forward_agent = $env_config['forward_agent'];

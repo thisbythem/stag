@@ -107,9 +107,10 @@ EOF;
   private function pullContentWithFtp() {
     $this->displayFeedback("Pulling content from $this->env");
     $dirs = $this->getContentDirectories();
+    $password = ($this->ftp_password) ? $this->ftp_password : $this->password;
 
     try {
-      $ftp = new Ftp("ftp://$this->user:$this->password@$this->host");
+      $ftp = new Ftp("ftp://$this->user:$password@$this->host");
       foreach ($dirs as $dir) {
         $ftp->chdir("$this->webroot/$dir");
         $files = $ftp->nlist('*');

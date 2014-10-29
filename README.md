@@ -46,8 +46,11 @@ couple of bucks, Congratulations! Stag is installed!
 To list all the commands, type: `stag help`
 
 For any command that will perform tasks on your server, you'll need to
-configure stag to talk to your server. Copy the default config to
-`_config/add-ons/stag.yaml`
+have setup [passwordless ssh
+access](http://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id/).
+It's relatively easy-to-do and makes things much more secure. If that's
+ready to go, you'll need to configure stag to talk to your server. Copy
+the default config to `_config/add-ons/stag.yaml`
 
 [Server Configuration](https://github.com/thisbythem/stag/wiki/Server-Configuration)
 

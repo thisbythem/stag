@@ -163,8 +163,10 @@ EOF;
   }
 
   private function deployWithFtp() {
+    $password = ($this->ftp_password) ? $this->ftp_password : $this->password;
+
     try {
-      $ftp = new Ftp("ftp://$this->user:$this->password@$this->host");
+      $ftp = new Ftp("ftp://$this->user:$password@$this->host");
 
       if (!$ftp->isDir($this->webroot)) {
         $ftp->mkdir($this->webroot);
