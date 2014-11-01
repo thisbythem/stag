@@ -82,6 +82,10 @@ EOF;
     return $this->config['servers'][$this->env]['deploy']['set_permissions_after'];
   }
 
+  private function shouldUpdateSubmodules() {
+    return $this->config['servers'][$this->env]['deploy']['update_submodules'];
+  }
+
   private function handleNoEnvironment() {
     if ($this->env == null) {
       $output = <<<EOF
@@ -119,6 +123,10 @@ EOF;
     $ssh = $this->getSshConnection();
     if ($this->deployed) {
       $output = $ssh->exec('git pull');
+
+      if ($this->shouldUpdateSubmodules()) {
+        $output .= $ssh->exec('git submodule init; git submodule update');
+      }
     } else {
       $path_pieces = explode('/', $this->webroot);
       $dir_name = array_pop($path_pieces);

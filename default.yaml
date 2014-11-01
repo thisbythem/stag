@@ -50,6 +50,7 @@ servers:
 #     pull_content_before: true
 #     clear_cache_after: true
 #     set_permissions_after: false
+#     update_submodules: false
 #
 #   == RSYNC ==
 #   deploy:
