@@ -4,7 +4,7 @@
 
 // start measuring
 define("STATAMIC_START", microtime(true));
-define("BASE_PATH", dirname("_add-ons"));
+require_once '.stag.php';
 define("APP_PATH", BASE_PATH . "/_app");
 
 // setting this now so that we can do things before the configurations are fully loaded
@@ -53,4 +53,3 @@ $stag->run($action, $opts);
 exit(0);
 
 ?>
-
