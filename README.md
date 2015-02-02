@@ -28,9 +28,9 @@ some sort of version control, then stag might not be for you... yet. Testers wel
 _For example, if you keep your Statamic installation in ~/Sites/mysite/public_html,
 you should change the line to:_
 
-```
-define("BASE_PATH", dirname("public_html/_add-ons"));
-```
+  ```
+  define("BASE_PATH", dirname("public_html/_add-ons"));
+  ```
 
 ### Using stag
 You need to add the stag bin directory to your $PATH. In your
