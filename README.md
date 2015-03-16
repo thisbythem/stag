@@ -43,7 +43,7 @@ export PATH=$PATH:_add-ons/stag/bin
 
 You may need to tweak the path depending on your structure.
 
-_For example, if you keep your Statamic installation in ~/Sites/mysite/public_html, you should change the line to
+_For example, if you keep your Statamic installation in ~/Sites/mysite/public_html, you should change the line to:_
 
 ```
 export PATH=$PATH:public_html/_add-ons/stag/bin
