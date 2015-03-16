@@ -24,7 +24,7 @@ some sort of version control, then stag might not be for you... yet. Testers wel
 ## Installing
 1. Download the repo, unzip and drop the stag directory into your
 \_add-ons. _(You'll need to rename stag-master to stag)_
-2. Copy \_add-ons/stag/.stag.php to your site root and edit the `BASE_PATH` if necessary.
+2. If your Statamic installation isn't in the root folder, create `.stag.php` in your root and tell Stag the path to your add-ons directory.  
 _For example, if you keep your Statamic installation in ~/Sites/mysite/public_html,
 you should change the line to:_
 
@@ -35,10 +35,18 @@ you should change the line to:_
 ### Using stag
 You need to add the stag bin directory to your $PATH. In your
 .bash_profile (or your prefrerred shell's config) drop in this
-line (you may need to tweak the path depending on your structure):
+line:
 
 ```
 export PATH=$PATH:_add-ons/stag/bin
+```
+
+You may need to tweak the path depending on your structure.
+
+_For example, if you keep your Statamic installation in ~/Sites/mysite/public_html, you should change the line to
+
+```
+export PATH=$PATH:public_html/_add-ons/stag/bin
 ```
 
 Reload your config file:
