@@ -95,7 +95,7 @@ EOF;
         $cmd .= "'ssh -p $this->port' ";
       }
 
-      $cmd .=  "-avl --stats --progress $this->user@$this->host:$this->webroot/$dir .;";
+      $cmd .=  "-avl --stats --progress $this->user@$this->host:$this->webroot/$dir/ $dir;";
 
       $output = shell_exec($cmd);
       $this->displayFeedback($output);
